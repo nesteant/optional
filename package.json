@@ -1,0 +1,28 @@
+{
+  "name": "optional",
+  "version": "1.0.0",
+  "description": "Allows to request js objects without null checks",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nesteant/optional.git"
+  },
+  "author": "Anton Nesterenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nesteant/optional/issues"
+  },
+  "homepage": "https://github.com/nesteant/optional#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "browserify-shim": "^3.8.12",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-browserify": "^5.0.3",
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {}
+}
