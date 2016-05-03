@@ -29,6 +29,15 @@ module.exports = function(baseObject, stateful) {
         return wrapper;
     }
 
+    /**
+     * Allows to get property of the object without specifying explicit null checks
+     *
+     * @param selector - dot separated path to specified object
+     * @param defaultObject - default object which should be returned in case path specified leads to undefined property
+     * @param persistDefault - whether to save default object as a property of object wrapped with optional in case
+     * this propery is not specified
+     * @returns returns property under the specified path or default object if path leads to unspecified property
+     */
     wrapper.get = function(selector, defaultObject, persistDefault) {
         if (selector == null) {
             return currentObject;
@@ -49,6 +58,12 @@ module.exports = function(baseObject, stateful) {
         return temporary;
     };
 
+    /**
+     * Allows to set properties of the object without specifying explicit null checks
+     * @param selector - dot separated path to the property which should be specified
+     * @param object - object which should be set as a property of the object wrapped with optional
+     * @returns optional
+     */
     wrapper.set = function(selector, object) {
         if (object == null) {
             return wrapper;
