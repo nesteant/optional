@@ -60,6 +60,7 @@ module.exports = function(baseObject, stateful) {
 
     /**
      * Allows to set properties of the object without specifying explicit null checks
+     *
      * @param selector - dot separated path to the property which should be specified
      * @param object - object which should be set as a property of the object wrapped with optional
      * @returns optional
