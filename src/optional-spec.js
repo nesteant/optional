@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    describe('Tests for get method of optional', function() {
+    describe('Test get().', function() {
         var optional;
         var testObject;
         var CHECK_STRING = 'TEST';
@@ -18,9 +18,58 @@
             };
         });
 
-        it('test', function() {
+        it('Get defined property', function() {
             var result = optional(testObject).get('a.b.c.d', {});
-            expect(CHECK_STRING).toBe(result)
+            expect(result).toBe(CHECK_STRING);
+        });
+
+        it('Get not defined property without default', function() {
+            var result = optional(testObject).get('a.b.c.e');
+            expect(result).toBe(null);
+        });
+
+        it('Get not defined property with default', function() {
+            var expectedObject = {};
+            var result = optional(testObject).get('a.b.c.e', expectedObject);
+            expect(result).toBe(expectedObject);
+        });
+
+        it('Get not defined property with persistent default', function() {
+            var expectedObject = {};
+            var result = optional(testObject).get('a.b.c.e', expectedObject, true);
+            expect(result).toBe(expectedObject);
+            expect(testObject.a.b.c.e).toBe(expectedObject);
+        });
+    });
+
+    describe('Test set().', function() {
+        var optional;
+        var testObject;
+        var CHECK_STRING = 'TEST';
+
+        beforeEach(function() {
+            optional = require('./optional');
+            testObject = {
+                a: {
+                    b: {
+                        c: {
+                            d: CHECK_STRING
+                        }
+                    }
+                }
+            };
+        });
+
+        it('Set object', function() {
+            var expectedObject = {};
+            optional(testObject).set('a.b.c.e', expectedObject);
+            expect(testObject.a.b.c.e).toBe(expectedObject);
+        });
+
+        it('Override object', function() {
+            var expectedObject = {};
+            optional(testObject).set('a.b.c.d', expectedObject);
+            expect(testObject.a.b.c.d).toBe(expectedObject);
         });
     });
 })();

@@ -43,16 +43,18 @@ module.exports = function(baseObject, stateful) {
             return currentObject;
         }
 
-        currentObject = wrapper(selector).get();
-        if (currentObject == null) {
+        var temporary = wrapper(selector).get();
+        if (stateful) {
+            currentObject = temporary;
+        } else {
+            wrapper.reset();
+        }
+
+        if (temporary == null) {
             if (persistDefault) {
                 wrapper.set(selector, defaultObject);
             }
-            currentObject = defaultObject;
-        }
-        var temporary = currentObject;
-        if (!stateful) {
-            wrapper.reset();
+            temporary = defaultObject ? defaultObject : null;
         }
 
         return temporary;
@@ -66,6 +68,10 @@ module.exports = function(baseObject, stateful) {
      * @returns optional
      */
     wrapper.set = function(selector, object) {
+        if (currentObject == null) {
+            currentObject = {};
+        }
+
         if (object == null) {
             return wrapper;
         }
