@@ -33,10 +33,36 @@
             var result = optional(testObject).get('a.b.c.e', expectedObject);
             expect(result).toBe(expectedObject);
         });
+    });
 
-        it('Get not defined property with persistent default', function() {
+    describe('Test setUndefined().', function() {
+        var optional;
+        var testObject;
+        var CHECK_STRING = 'TEST';
+
+        beforeEach(function() {
+            optional = require('./optional');
+            testObject = {
+                a: {
+                    b: {
+                        c: {
+                            d: CHECK_STRING
+                        }
+                    }
+                }
+            };
+        });
+
+        it('Set defined property', function() {
             var expectedObject = {};
-            var result = optional(testObject).get('a.b.c.e', expectedObject, true);
+            var result = optional(testObject).setUndefined('a.b.c.d', expectedObject);
+            expect(result).toBe(CHECK_STRING);
+            expect(testObject.a.b.c.d).toBe(CHECK_STRING);
+        });
+
+        it('Set undefined property', function() {
+            var expectedObject = {};
+            var result = optional(testObject).setUndefined('a.b.c.e', expectedObject);
             expect(result).toBe(expectedObject);
             expect(testObject.a.b.c.e).toBe(expectedObject);
         });

@@ -4,7 +4,7 @@ module.exports = function(config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: 'src',
+        basePath: './',
         plugins: [
             'karma-browserify',
             'karma-jasmine',
@@ -30,7 +30,7 @@ module.exports = function(config) {
             debug: true
         },
         preprocessors: {
-            './**/*.js': ['browserify']
+            '*.js': ['browserify']
         },
 
         // test results reporter to use
